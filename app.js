@@ -36,11 +36,47 @@
   //console.log(specificityArray)
 
 
+//To create a chart, we need to instantiate the Chart class. To do this, we need to pass in the node, jQuery instance, or 2d context of the canvas of where we want to draw the chart.
+var ctx = document.getElementById("myChart").getContext("2d");
+
+var data = {
+    labels: specificityArray,
+    datasets: [
+        {
+            label: "My First dataset",
+            backgroundColor: 'rgba(255, 172, 100, 1)',
+            borderColor: '#202b33',
+            borderWidth: 1,
+            data: specificityArray,
+        }
+    ]
+};
+
+// Chart.js
+var myChart = new Chart(ctx,{
+  type: 'bar',
+  data: data,
+  options: {
+    scales: {
+      xAxes: [{
+        stacked: true,
+        //barThickness: 5
+        barPercentage: 1,
+        categoryPercentage: 1
+        //ticks: { beginAtZero: true, maxTicksLimit: 4 }
+      }]
+    },
+    responsive: false
+  }
+});
+console.log(myChart);
+
+
 
 
 // Line Chart
 
-
+/*
 
   var salesData = {
     labels: specificityArray,
@@ -75,7 +111,7 @@
 
   });
 
-
+*/
 
 
 
