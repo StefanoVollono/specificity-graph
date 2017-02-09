@@ -19,10 +19,11 @@
   for (var i=0; i< parsed.length; i++) {
     selectorArray.push(parsed[i].selector);
   }
-  //console.log(selectorArray);
+  var selectorArrayLength = selectorArray.length;
+  $('#selectors').text(selectorArrayLength);
+
   var string = selectorArray.join(',');
 
-  //console.log(string);
 
 
 
@@ -36,48 +37,98 @@
   //console.log(specificityArray)
 
 
-//To create a chart, we need to instantiate the Chart class. To do this, we need to pass in the node, jQuery instance, or 2d context of the canvas of where we want to draw the chart.
-var ctx = document.getElementById("myChart").getContext("2d");
 
-var data = {
-    labels: specificityArray,
-    datasets: [
-        {
-            label: "My First dataset",
-            backgroundColor: 'rgba(255, 172, 100, 1)',
-            borderColor: '#202b33',
-            borderWidth: 1,
-            data: specificityArray,
-        }
-    ]
-};
+var ctx = document.getElementById("myChart").getContext("2d");
 
 // Chart.js
 var myChart = new Chart(ctx,{
-  type: 'bar',
-  data: data,
+  type: 'line',
+  data: {
+    labels: specificityArray,
+    datasets: [
+      {
+        label: "Specificity",
+        fill: true,
+        lineTension: 0.4,
+        backgroundColor: "rgba(255, 172, 100, 0.1)",
+        borderColor: "rgba(255, 172, 100, 1)",
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 2,
+        borderJoinStyle: 'miter',
+        pointBorderColor: "#202b33",
+        pointBackgroundColor: "rgba(255, 172, 100, 1)",
+        pointBorderWidth: 2,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(255, 172, 100, 1)",
+        pointHoverBorderColor: "#ffffff",
+        pointHoverBorderWidth: 3,
+        pointRadius: 6,
+        pointHitRadius: 10,
+        data: specificityArray,
+        spanGaps: false,
+      }
+    ]
+  },
   options: {
-    scales: {
-      xAxes: [{
-        stacked: true,
-        //barThickness: 5
-        barPercentage: 1,
-        categoryPercentage: 1
-        //ticks: { beginAtZero: true, maxTicksLimit: 4 }
-      }]
-    },
-    responsive: false
+    responsive: false,
   }
 });
-console.log(myChart);
+
+
+
+// Chart.js
+
+var ctxLight = document.getElementById("myChartLight").getContext("2d");
+var myChartLight = new Chart(ctxLight,{
+  type: 'line',
+  data: {
+    labels: specificityArray,
+    datasets: [
+      {
+        label: "Specificity",
+        fill: false,
+        lineTension: 0,
+        backgroundColor: "rgba(75,192,192,0.4)",
+        borderColor: "rgba(75,192,192,1)",
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: "rgba(75,192,192,1)",
+        pointBackgroundColor: "#fff",
+        borderWidth: 0.8,
+        pointBorderWidth: 0,
+        pointHoverRadius: 0,
+        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBorderWidth: 0,
+        pointRadius: 0,
+        pointHitRadius: 0,
+        data: specificityArray,
+        spanGaps: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        display: false
+      }],
+      yAxes: [{
+        display: false
+      }],
+    }
+  }
+});
+
 
 
 
 
 // Line Chart
-
 /*
-
   var salesData = {
     labels: specificityArray,
     datasets: [
@@ -93,7 +144,7 @@ console.log(myChart);
       }
     ]
   };
-  var ctx = document.getElementById("salesData").getContext("2d");
+  var ctx = document.getElementById("myChartLight").getContext("2d");
   window.myLineChart = new Chart(ctx).Line(salesData, {
     pointDotRadius : 6,
     pointDotStrokeWidth : 2,
@@ -106,9 +157,7 @@ console.log(myChart);
     scaleSteps: 25,
     scaleStepWidth: 10,
     scaleStartValue: 0,
-
     responsive: false
-
   });
 
 */

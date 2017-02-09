@@ -6,269 +6,31 @@
     <title>Specify</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-
-        @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
-
-        textarea {
-            background: white;
-            width: 100%;
-            height:300px;
-        }
-
-
-        .chartWrapper {
-            position: relative;
-            max-width: 100%;
-        }
-
-        .chartWrapper > canvas {
-            position: absolute;
-            left: 0;
-            top: 0;
-            pointer-events:none;
-        }
-
-        .chartAreaWrapper {
-            width: 100%;
-            overflow-x: scroll;
-        }
-
-
-
-        html {
-            height: 100%;
-            font-family: 'Lato', sans-serif;
-        }
-        body {
-            height: 100%;
-            margin: 0;
-            background: linear-gradient(135deg, rgba(65,131,155,1) 0%,rgba(51,98,123,1) 100%);
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-        * {
-            box-sizing: border-box;
-        }
-        #container {
-            display: block;
-            width: calc(100% - 15px);
-            background: #202b33;
-            margin: 15px auto;
-            border-radius: 4px;
-        }
-
-        /* Side Bar */
-        #sideMenu {
-            width: 100%;
-            height: 100%;
-            padding: 30px;
-
-
-            vertical-align: top;
-            color: #fff;
-        }
-        .menu {
-            list-style: none;
-            margin:  24px 0;
-            padding: 0;
-        }
-        .menu li {
-            display: block;
-            height: 30px;
-            width: 100%;
-            line-height: 30px;
-            font-size: 14px;
-            font-weight: 200;
-            color: rgba(255, 255, 255, .6);
-            position: relative;
-        }
-        .menu li:hover {
-            color: #239ae3;
-        }
-        .menu li:first-child {
-            height: 35px;
-            line-height: 35px;
-            font-size: 16px;
-            font-weight: 400;
-            color: #fff;
-        }
-        .addCategory {
-            font-size: 13px;
-            font-weight: 200;
-            color: rgba(255, 255, 255, .2);
-        }
-        .addCategory:hover {
-            color: #fff;
-        }
-
-        /* Content */
-        #content {
-            width: calc(100%);
-            height: 100%;
-            padding: 25px;
-            display: flex;
-        }
-
-        .controls {
-            display: block;
-            width: 70px;
-            height: 20px;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 10px;
-            font-weight: 300;
-            text-transform: uppercase;
-            text-align: center;
-            line-height: 20px;
-            float: right;
-            border-radius: 20px;
-        }
-        .activeControl {
-            background: rgba(255, 255, 255, 0.9);
-            color: #202b33;
-            font-weight: 600;
-        }
-        #salesData {
-            margin-bottom: 60px;
-        }
-        #totalSales {
-            height: 120px;
-            position: relative;
-            margin-top: 24px;
-            margin-bottom: 50px;
-        }
-        #totalSales .col {
-            float: left;
-            width: 33.33%;
-            height: 100%;
-        }
-        #totalSales .col .progressTitle {
-            float: left;
-            margin-left: 20px;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.4);
-        }
-        .progressBar {
-            float: left;
-            height: 120px;
-            width: 120px;
-            font-size: 40px;
-            text-align: center;
-            line-height: 120px;
-        }
-
-        /* Icons */
-        .notification {
-            display: block;
-            width: 20px;
-            height: 20px;
-            color: #202b33;
-            font-weight: 600;
-            line-height: 20px;
-            text-align: center;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, .6);
-            position: absolute;
-            top: 0; bottom: 0; right: 2%;
-            margin: auto;
-        }
-        .colorIcon {
-            display: block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            position: absolute;
-            top: 0; bottom: 0; right: 2%;
-            margin: auto;
-        }
-        .plus {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            color: #202b33;
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 8px;
-            padding: 4px;
-            margin-right: 6px;
-            border: 2px solid rgba(255, 255, 255, .2);
-            border-radius: 50%;
-            color: rgba(255, 255, 255, .2);
-        }
-        .red {
-            background: #ec1561;
-        }
-        .orange {
-            background: #ff9939;
-        }
-        .green {
-            background: #2bab51;
-        }
-
-        /* Table */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th {
-            text-align: left;
-            color: #fff;
-            font-weight: 400;
-            font-size: 13px;
-            text-transform: uppercase;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0 10px;
-            padding-bottom: 14px;
-        }
-        tr:not(:first-child):hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        td {
-            height: 40px;
-            line-height: 40px;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.4);
-            padding: 0 10px;
-        }
-        /* Headers */
-        h1 {
-            font-size: 13px;
-            font-weight: 200;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin: 0;
-        }
-        h2 {
-            float: left;
-            font-size: 19px;
-            font-weight: 200;
-            letter-spacing: 1px;
-            margin: 0;
-            color: rgba(255, 255, 255, .8);
-        }
-        h3 {
-            float: left;
-            color: #fff;
-            font-size: 32px;
-            font-weight: 300;
-            margin: 0;
-            margin-top: 8%;
-            margin-left: 20px;
-            margin-bottom: 6px;
-        }
-
-        .clearFix {
-            clear: both;
-        }
-
-    </style>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600i" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" />
+    <link rel="stylesheet" type="text/css" href="bootstrap-v3-grid.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
-<div id="container">
-    <div id="sideMenu">
-
-        <textarea id="myTextarea">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box box--spaced">
+                    <h1 class="text text--head">Instant <span class="text--evidence">Specificity</span> Graph</h1>
+                    <a href="http://www.laboratoriocss.it" target="_blank">
+                        <img class="avatar" src="https://it.gravatar.com/userimage/23846567/f4162ae749d49bcc9620a2e0dd29b353.jpg?size=200" />
+                    </a>
+                </div>
+            </div>
+         </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="box">
+                    <div class="box__head fill-red">
+                        <p class="text text--title">Past your code here</p>
+                    </div>
+                    <textarea id="myTextarea">
     a:link,
 .crop img,
 #top #socialLinks li a .icon,
@@ -465,40 +227,54 @@ ul.social{float:right; margin-top:4px;}
 .pageTitle{font-size:40px;letter-spacing:-1px;color:white;}
 .pageTitle span{color:#eb593c;font-size:45px;}
 </textarea>
-        <button id="parseit"></button>
-
-    </div>
-    <div id="content">
-
-
-
-    <canvas id="myChart" width="7000" height="600"></canvas>
-
-
-<!--
-        <div class="chartWrapper">
-            <div class="chartAreaWrapper">
-                <canvas id="salesData" height="700" width="7000"></canvas>
+                </div>
+                <div class="box box--spaced">
+                    <div class="graph graph--small">
+                        <div class="graph__inner">
+                            <canvas class="graph__elem" id="myChartLight"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <canvas id="myChartAxis" height="700" width="0"></canvas>
+            <div class="col-sm-9">
+                <div class="box fill-dark">
+                    <div class="graph graph--big">
+                        <div class="graph__inner">
+                            <canvas class="graph__elem" id="myChart" width="8000" height="600"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        
-        <div class="mainChart" style="">
-            <canvas id="salesData" width="5000" height="600"></canvas>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="box box--spaced text-right fill--blu">
+                    <h3 class="text--title">Selettori:</h3>
+                    <p class="text--head" id="selectors"></p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box box--spaced text-right fill--green"></div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box box--spaced text-right fill-orange"></div>
+            </div>
         </div>
-        -->
     </div>
-</div>
-</div>
 
 
-<!--
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+    <!--
+    <button id="parseit"></button>
 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
-<script type="text/javascript" src="specificity.js"></script>
-<script type="text/javascript" src="css.min.js"></script>
-<script type="text/javascript" src="app.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.js"
+            integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+            crossorigin="anonymous"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
+    <script type="text/javascript" src="specificity.js"></script>
+    <script type="text/javascript" src="css.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
 </body>
 </html>
