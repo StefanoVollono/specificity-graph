@@ -6,13 +6,18 @@
   var specificityArray = [];
 
 
+  var output = document.getElementById("myTextarea").value;
+  output = output.replace(/\s/g, "")
+  document.getElementById("myTextarea").innerHTML = output;
+
+
 
   //initialize parser object
   var parser = new cssjs();
 
   //parse css string
-  var parsed = parser.parseCSS(document.getElementById("myTextarea").value);
-  //console.log(parsed);
+  var parsed = parser.parseCSS(output);
+  console.log(parsed);
 
 
 
