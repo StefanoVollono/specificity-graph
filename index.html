@@ -1,0 +1,498 @@
+<!doctype html>
+<html class="no-js" lang="en" data-ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Specify</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+        @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+
+        textarea {
+            background: white;
+            width: 100%;
+            height:300px;
+        }
+
+
+        .chartWrapper {
+            position: relative;
+            max-width: 100%;
+        }
+
+        .chartWrapper > canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            pointer-events:none;
+        }
+
+        .chartAreaWrapper {
+            width: 100%;
+            overflow-x: scroll;
+        }
+
+
+
+        html {
+            height: 100%;
+            font-family: 'Lato', sans-serif;
+        }
+        body {
+            height: 100%;
+            margin: 0;
+            background: linear-gradient(135deg, rgba(65,131,155,1) 0%,rgba(51,98,123,1) 100%);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        #container {
+            display: block;
+            width: calc(100% - 15px);
+            background: #202b33;
+            margin: 15px auto;
+            border-radius: 4px;
+        }
+
+        /* Side Bar */
+        #sideMenu {
+            width: 100%;
+            height: 100%;
+            padding: 30px;
+
+
+            vertical-align: top;
+            color: #fff;
+        }
+        .menu {
+            list-style: none;
+            margin:  24px 0;
+            padding: 0;
+        }
+        .menu li {
+            display: block;
+            height: 30px;
+            width: 100%;
+            line-height: 30px;
+            font-size: 14px;
+            font-weight: 200;
+            color: rgba(255, 255, 255, .6);
+            position: relative;
+        }
+        .menu li:hover {
+            color: #239ae3;
+        }
+        .menu li:first-child {
+            height: 35px;
+            line-height: 35px;
+            font-size: 16px;
+            font-weight: 400;
+            color: #fff;
+        }
+        .addCategory {
+            font-size: 13px;
+            font-weight: 200;
+            color: rgba(255, 255, 255, .2);
+        }
+        .addCategory:hover {
+            color: #fff;
+        }
+
+        /* Content */
+        #content {
+            width: calc(100%);
+            height: 100%;
+            padding: 25px;
+            display: flex;
+        }
+
+        .controls {
+            display: block;
+            width: 70px;
+            height: 20px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 10px;
+            font-weight: 300;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 20px;
+            float: right;
+            border-radius: 20px;
+        }
+        .activeControl {
+            background: rgba(255, 255, 255, 0.9);
+            color: #202b33;
+            font-weight: 600;
+        }
+        #salesData {
+            margin-bottom: 60px;
+        }
+        #totalSales {
+            height: 120px;
+            position: relative;
+            margin-top: 24px;
+            margin-bottom: 50px;
+        }
+        #totalSales .col {
+            float: left;
+            width: 33.33%;
+            height: 100%;
+        }
+        #totalSales .col .progressTitle {
+            float: left;
+            margin-left: 20px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .progressBar {
+            float: left;
+            height: 120px;
+            width: 120px;
+            font-size: 40px;
+            text-align: center;
+            line-height: 120px;
+        }
+
+        /* Icons */
+        .notification {
+            display: block;
+            width: 20px;
+            height: 20px;
+            color: #202b33;
+            font-weight: 600;
+            line-height: 20px;
+            text-align: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .6);
+            position: absolute;
+            top: 0; bottom: 0; right: 2%;
+            margin: auto;
+        }
+        .colorIcon {
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            position: absolute;
+            top: 0; bottom: 0; right: 2%;
+            margin: auto;
+        }
+        .plus {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            color: #202b33;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 8px;
+            padding: 4px;
+            margin-right: 6px;
+            border: 2px solid rgba(255, 255, 255, .2);
+            border-radius: 50%;
+            color: rgba(255, 255, 255, .2);
+        }
+        .red {
+            background: #ec1561;
+        }
+        .orange {
+            background: #ff9939;
+        }
+        .green {
+            background: #2bab51;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            text-align: left;
+            color: #fff;
+            font-weight: 400;
+            font-size: 13px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0 10px;
+            padding-bottom: 14px;
+        }
+        tr:not(:first-child):hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        td {
+            height: 40px;
+            line-height: 40px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.4);
+            padding: 0 10px;
+        }
+        /* Headers */
+        h1 {
+            font-size: 13px;
+            font-weight: 200;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+        h2 {
+            float: left;
+            font-size: 19px;
+            font-weight: 200;
+            letter-spacing: 1px;
+            margin: 0;
+            color: rgba(255, 255, 255, .8);
+        }
+        h3 {
+            float: left;
+            color: #fff;
+            font-size: 32px;
+            font-weight: 300;
+            margin: 0;
+            margin-top: 8%;
+            margin-left: 20px;
+            margin-bottom: 6px;
+        }
+
+        .clearFix {
+            clear: both;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <div id="sideMenu">
+
+        <textarea id="myTextarea">
+    a:link,
+.crop img,
+#top #socialLinks li a .icon,
+#top #socialLinks li a:hover span.message,
+aside#quicklink li,
+.fixedbarElem a.icon,
+#stream li.post,
+#stream li.post .wp-post-image,
+#stream li.post .trianglePostImg,
+#stream li.post .time,
+#loadMore,
+#sapevicheLast #next{
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+}
+aside#author ul,a.fotoArticoli small{
+	-webkit-transition: all 0.4s ease;
+	-moz-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+}
+.footerDeco{
+	-webkit-transition: right 1.2s ease, border-color 0.2s ease;
+	-moz-transition: right 1.2s ease, border-color 0.2s ease;
+	-o-transition: right 1.2s ease, border-color 0.2s ease;
+	transition: right 1.2s ease, border-color 0.2s ease;
+
+}
+ul.social li a span{
+	-webkit-transition: text-indent 0.5s ease;
+	-moz-transition: text-indent 0.5s ease;
+	-o-transition: text-indent 0.5s ease;
+	transition: text-indent 0.5s ease;
+}
+.home #stream li.lastPost,
+.home #stream li.lastPost .wp-post-image,
+.home #stream li.lastPost .trianglePostImg,
+.home #stream li.lastPost .triangleComment{
+	-webkit-transition:none;
+	-moz-transition:none;
+	-o-transition:none;
+	transition:none;
+}
+
+/* ==== Font-face
+========================= */
+@font-face {
+    font-family:fontello;
+    src: url('font/fontello/fontello.eot');
+    src: url('font/fontello/fontello.eot?#iefix') format('embedded-opentype'),
+         url('font/fontello/fontello.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+/* ==== COMMON
+========================= */
+html,body{height:100%;}
+html{-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
+body {font-family: 'Maven Pro', sans-serif;font-size: 15px;color: #34383d;padding: 0px 0px 0 91px;background:white;}
+a:link, a:visited{color:#eb593c; text-decoration:none;}
+a:hover, a:active{text-decoration:none;color:#383838;}
+input,select,option,button,textarea,fieldset{font-family:Arial, Helvetica, sans-serif;}
+strong{font-weight:bold;}
+::selection {background: rgba(129,200,18,0.7);}
+
+#container {background:white;padding:0px 0px 20px 0px;min-width:100%;}
+#container .syntaxhighlighter{  padding: 10px 0!important;
+  background: #34383d!important;
+  border-radius: 4px;
+  margin: 0 0 20px!important;
+  border: 10px solid #efefef;
+  box-sizing: border-box;
+  font-size: 16px!important;
+  overflow-x: hidden!important;}
+#container .syntaxhighlighter .line.alt1, #container .syntaxhighlighter .line.alt2{background:#34383d!important;}
+
+
+
+/* ==== CLASSES
+========================= */
+.clear{clear:both}
+.center{width: auto;max-width: 1250px;margin:0 auto;position:relative;}
+.time, li.post a[rel="author"]{text-transform: uppercase;line-height: normal;text-align: center;border-radius: 3px;font-size: 13px;margin-right:0px;font-family:arial;text-indent:-200px;overflow:hidden;display:inline-block;padding:3px 0;font-size: 14px;vertical-align: text-bottom;}
+
+
+/* ==== TOP
+========================= */
+#mainHeader{position: fixed;top: 0;width: auto;left: 91px;z-index: 3;right: 0;opacity: 0.99;background: #34383d;padding: 15px 25px;height: 30px;}
+.logo, .logo a{float:left;}
+.logo:link, .logo:visited, .logo a:link, .logo a:visited{color:#fff; font-size:30px;}
+.logo a:hover{text-decoration:none;}
+	.logo span{color:#81c812;}
+
+ul.social{float:right; margin-top:4px;}
+	ul.social li{display:inline-block; *display:inline;*zoom1;margin-left:10px;}
+	ul.social li:first-child{margin-left:0}
+		ul.social li a{font-size:24px;color:#63666a;-webkit-backface-visibility: hidden;}
+		ul.social li a:hover{color:#81c812}
+		ul.social li a span{text-indent:-60px;overflow:hidden;display: inline-block;white-space: nowrap;font-size: 13px;margin-left: 5px;vertical-align: middle;-webkit-backface-visibility:hidden;}
+		ul.social li a:before{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-family:fontello;}
+		ul.social li.rssfeed a:before{content:"\E73A";}
+		ul.social li.twitter a:before{content:"\E018";}
+		ul.social li.facebook a:before{content:"\E801";}
+		ul.social li.googleplus a:before{content:"\F309";}
+
+#fixedBar{top:0;bottom:0;left:0;width:65px;padding: 0 13px;position:fixed;background-color:#eaebeb;z-index:10;overflow:hidden;}
+#fixedBar.open{box-shadow:0 0px 15px 0 rgba(0,0,0,0.35);cursor:default}
+	.fixedbarElem:hover .icon{color:#81c812;cursor:pointer;}
+	.fixedbarElem{border-bottom:1px solid #d7d8d8;position:relative;padding:18px 0 18px 10px;height:35px;}
+	#githubRepo{border-bottom:0;}
+	.fixedbarElem .showHide{position: absolute;right:79px}
+	.fixedbarElem a.icon{display:block;position:absolute;top:0;font-size:44px;font-family:fontello;line-height:71px;width:65px;right:0px;text-align:center;color:#4e5256;}
+	.fixedbarElem a.icon:hover{text-shadow:none;}
+	.fixedbarElem a span.text{position: absolute;right: -9999px;}
+	.fixedbarElem a:before{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;}
+	#siteSearch a.icon{font-size:38px;}
+	#siteSearch a.icon:before{content:"\E800";}
+	#tags a.icon{font-size:35px;}
+	#tags a.icon:before{content:"\E807";}
+	#rubriche a.icon{font-size:38px;}
+	#rubriche a.icon:before{content:"\E738";}
+	#githubRepo a.icon{font-size:40px;}
+	#githubRepo a.icon:before{content:"\F056";}
+
+#siteSearch #searchInput{font-size:17px;color:#383838;background:white;height:33px;padding: 0 0 0 10px;width:190px;border: 0;border-radius: 3px;box-shadow: 0 1px 0 0 rgba(0,0,0,0.1);}
+#siteSearch #searchSubmit{cursor: pointer; background: none; text-indent: -9999px; width: 1px; height: 1px; border: 0; position: absolute; top: 0; right: 0; z-index: 10; font-size: 0;}
+
+.customSelect{position:relative;width:200px;}
+.customSelect .selected{cursor:pointer;background-color:white;color:#333;font-size:17px;border-radius: 3px;overflow: hidden;padding:9px 45px 9px 13px;white-space: nowrap;box-shadow:0 1px 0 0 rgba(0,0,0,0.1)}
+.customSelect .selected .icon{font-family: fontello;font-size: 19px;color: #666;background: white;padding: 1px;text-align: center;position: absolute;right: 0;top: 0px;width: 33px;height: 33px;line-height: 33px;border-left: 1px solid #ccc;background: #fafafa;border-radius: 0 3px 3px 0;}
+.customSelect .selected .icon:before{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;content:"\E75C";}
+.customSelect .overflowList{overflow:auto;position: absolute;left:0;top:30px;height:250px;z-index:10;border-radius:3px;}
+#rubricheList .overflowList{height:auto;z-index:11;}
+
+.mCustomScrollBox, .mCSB_container{border-radius:3px;margin-right: 0!important;}
+#fixedBar.open  .overflowList{display:none} /*Nascondo la tendina solo quando apro la fixedbar altrimwenti non mi carica l'altezza*/
+.mCSB_scrollTools a+.mCSB_draggerContainer{margin:5px 0!important;}
+.mCSB_scrollTools{display:block!important;top:5px!important;bottom:5px!important;}
+
+.customSelect ul{background-color:#34383d;border-radius:3px;padding:5px 15px 5px 5px;width:180px;box-shadow:inset 0 0 90px rgba(0,0,0,0.5)}
+#rubricheList ul{padding:5px;width:190px;}
+.customSelect ul li{line-height:20px;font-size:14px;position:relative;}
+.customSelect ul li a{border-radius: 3px;color: white;display: block;padding: 5px 9px;text-decoration: none;font-size: 13px;text-transform:capitalize;}
+.customSelect ul li a:hover{background-color: #81c812;}
+.customSelect ul li .infolist{position: absolute;right: 7px;top: 7px;font-weight: bold;background: white;border-radius: 2px;padding: 0px 2px;font-size: 10px;height: 15px;line-height: 15px;text-align: center;color: black;box-shadow: 0 1px rgba(0,0,0,0.5);}
+
+#githubRepo .showHide{width:200px;}
+#githubRepo:hover .showHide a:link, #githubRepo:hover .showHide a:visited, #githubRepo .showHide a:link, #githubRepo .showHide a:visited{color:#4e5256!important;}
+#githubRepo h3{text-transform:uppercase;font-size:17px;margin-bottom:5px;}
+#githubRepo p{font-size:13px;}
+
+#footer{position:absolute;text-align:right;right:25px;bottom:20px;font-size:12px;color:#383838;display:none;z-index:2;width:266px;}
+	#footer ul{float: right;margin-bottom:10px;}
+	#footer ul li {font-size: 13px!important;display: inline-block;margin-bottom: 4px;white-space:nowrap;}
+	#footer ul li a:link, #footer ul li a:visited{color:#4e5256;background: white;padding: 4px 4px;display:inline-block}
+	#footer ul li a:hover{color:white;background: #383838;}
+	#footer p.logoMini{font-size:23px;color:white;display: inline-block;margin-bottom: 5px;clear:both;color:white;}
+	#footer p.logoMini .icon:before{font-family:fontello;content:"\E7A5";text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-size:14px;margin-right:5px;}
+	#footer p.logoMini span.copyright{font-size: 13px}
+	.footerDeco{display: block;height: 0px;width: 0px;_font-size: 0;border-top: 165px solid transparent;border-bottom: 0px solid transparent;border-right: 695px solid #c9cbcb;bottom:0px;position: absolute;left:-379px;z-index: 1;overflow:hidden;transform: scale(0.9999);}
+	.footerDeco:hover, .footerDecoLogo:hover + .footerDeco, #footer:hover + .footerDecoLogo + .footerDeco{border-right-color:#81c812;}
+	.footerDecoLogo{display:block;width:36px;height:65px;background:url("img/labFixedLogo.png") no-repeat left top;left:25px;bottom:20px;position:absolute;z-index:3;cursor:pointer;}
+
+
+
+/* ==== ARCHIVES + STREAM
+========================= */
+#stream{margin-top:60px;}
+	#stream ul{margin-bottom:0px;padding:0}
+	#stream li.post{padding:10px 25px;margin:0 auto;background:#f6f7f7;border-bottom:1px solid #eaebeb}
+	#stream li.post:hover{background:white;}
+	#stream li.post .wp-post-image{width:50px;height:50px;border-radius:30px;float:left;margin-right:20px;border:5px solid #dedede;position:relative;z-index:2;}
+	#stream li.post .trianglePostImg{height: 0px;width: 0px;_font-size: 0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid #dedede;top:23px;position: absolute;left:40px;z-index: 1;transform: scale(0.9999);}
+	#stream li.post:hover .trianglePostImg{left: 58px;}
+	#stream li.post .overflowText{overflow:hidden;white-space: nowrap;text-overflow:ellipsis;height: 61px;line-height: 61px;margin-right:55px;}
+	#stream li.post h2{font-size:22px;display:inline;margin:0 10px 0 0;font-weight:300;letter-spacing:-1px;}
+	#stream li.post p{font-size:16px;display:inline;font-family:Arial;}
+	#stream li.post a[rel="author"]{background:#eb593c;color:white;margin-right:0px!important;}
+	#stream li.post .time{background:#E2E2E2;color: #63666a;}
+	#stream li.post:hover .time, #stream li.post:hover a[rel="author"]{text-indent:0;padding: 3px 4px;margin-right: 10px;}
+
+.wp-pagenavi{clear:both;max-width:1250px;margin:20px auto 0;padding:0 30px;}
+	.wp-pagenavi a, .wp-pagenavi span{padding: 5px 10px 7px;background-color:#f7f7f7;text-decoration: none;margin-right: 5px;border-radius: 4px;display:inline-block;}
+	.wp-pagenavi a:hover, .wp-pagenavi span.current{border-color: #aaa;}
+	.wp-pagenavi span.current{font-weight: bold;}
+	.previouspostslink, .nextpostslink{display:none!important;}
+
+.headerTitle{padding: 30px;background-color: #4e5256;}
+.pageTitle{font-size:40px;letter-spacing:-1px;color:white;}
+.pageTitle span{color:#eb593c;font-size:45px;}
+</textarea>
+        <button id="parseit"></button>
+
+    </div>
+    <div id="content">
+
+
+
+        <div class="chartWrapper">
+            <div class="chartAreaWrapper">
+                <canvas id="salesData" height="700" width="7000"></canvas>
+            </div>
+            <canvas id="myChartAxis" height="700" width="0"></canvas>
+        </div>
+
+        <!--
+        <div class="mainChart" style="">
+            <canvas id="salesData" width="5000" height="600"></canvas>
+        </div>
+        -->
+    </div>
+</div>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script type="text/javascript" src="specificity.js"></script>
+<script type="text/javascript" src="css.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+</body>
+</html>
