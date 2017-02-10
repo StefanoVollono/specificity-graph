@@ -25,7 +25,7 @@
     selectorArray.push(parsed[i].selector);
   }
   var selectorArrayLength = selectorArray.length;
-  $('#selectors').text(selectorArrayLength);
+
 
   var string = selectorArray.join(',');
 
@@ -39,6 +39,11 @@
     specificityArray.push(specificity[i].specificity.replace(/\,/g,""));
   }
 
+
+
+
+  //$('#myChart').attr('width',specificityArray.length*40);
+  $('#selectors').text(specificityArray.length);
   //console.log(specificityArray)
 
 
@@ -71,7 +76,7 @@ var myChart = new Chart(ctx,{
         pointRadius: 6,
         pointHitRadius: 10,
         data: specificityArray,
-        spanGaps: false,
+        spanGaps: false
       }
     ]
   },
