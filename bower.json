@@ -9,6 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "jQuery": "^3.1.1",
-    "chart.js": "^2.5.0"
+    "chart.js": "^2.5.0",
+    "bootstrap-3-grid": "^0.0.1"
   }
 }
