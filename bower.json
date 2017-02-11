@@ -1,0 +1,14 @@
+{
+  "name": "bower",
+  "homepage": "https://github.com/StefanoVollono/specificity-graph",
+  "authors": [
+    "stefano vollono <stefanovollono@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "dependencies": {
+    "jQuery": "^3.1.1",
+    "chart.js": "^2.5.0"
+  }
+}
