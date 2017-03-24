@@ -18,7 +18,7 @@
 
     //var specificityArray = [];
     $scope.sgtConfig = {
-      selectors: []
+      selectors: 0
     };
 
     // Initialize parser object
