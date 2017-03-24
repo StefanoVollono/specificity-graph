@@ -42,8 +42,10 @@ body {
 .fill-red {background: #fa2a02;}
 .fill--green {background: #29c75f;}
 .fill--blu {background: #39c3da;}
-.fill-orange {background: #FFBC11;}
+.fill-yellow {background: #FFBC11;}
 .fill-dark {background: #202b33;}
+.fill-light {background: #efefef;}
+.fill-orange {background: #FF690D}
 
 
 .avatar {
@@ -106,6 +108,7 @@ textarea {
 .graph--big {
     height: 630px;
     overflow-x: auto;
+    overflow-y: hidden;
 }
 .graph--small {
     height: auto;
@@ -113,6 +116,7 @@ textarea {
 .graph__inner {
     position: relative;
     max-width: 100%;
+    height: inherit;
 }
 .graph--big .graph__elem {
     position: absolute;
@@ -132,21 +136,36 @@ textarea {
     fill: white;
     height: inherit;
 }
-
-.icon--book {
-
+.icon-graph {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    left: 50%;
+}
+.graph--big .icon-graph{
+    width: 400px;
+    height: 400px;
+}
+.graph--small .icon-graph{
+    width: 150px;
+    height: 150px;
 }
 
 .btn {
-  background:    #fa2a02;
-  background:    -webkit-linear-gradient(#fa2a02, #b62205);
-  background:    linear-gradient(#fa2a02, #b62205);
-  border:        1px solid #781300;
-  border-radius: 2px;
-  color:         #fff;
-  display:       inline-block;
-  padding:       10px 24px;
-  font:          normal 400 21px/1 "Roboto", sans-serif;
-  text-align:    center;
-  text-shadow:   1px 1px 0 #781300;
+    display: block;
+    border: 0;
+    width: 100%;
+    padding: 10px 0;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 400;
+    border-top: 1px solid #efefef;
+    color: white;
+    cursor: pointer
+}
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: .5;
 }
