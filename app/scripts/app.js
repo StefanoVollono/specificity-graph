@@ -1,40 +1,70 @@
 (function (){
   "use strict";
 
-  //document.getElementById("parseit").addEventListener("click", parseCSS);
-  var selectorArray = [];
-  var specificityArray = [];
+  // define angular app
+  angular
+    .module('sgt',[])
+    .controller('MainDashboard', MainDashboard);
 
+  // Safe minify
+  MainDashboard.$inject = ['$scope'];
 
-  var output = document.getElementById("myTextarea").value;
-  output = output.replace(/\s/g, "")
-  document.getElementById("myTextarea").innerHTML = output;
+  // Main dashboard controller function
+  function MainDashboard ($scope) {
 
+    // Declare some variables
+    var selectorArray = [];
+    var specificityArray = [];
+    $scope.totalSelector = 0;
 
+    // Initialize parser object
+    var cssjsObj = new cssjs();
 
-  //initialize parser object
-  var parser = new cssjs();
+    // Entry Point scan Button
+    $scope.parseCssInput = function () {
 
-  //parse css string
-  var parsed = parser.parseCSS(output);
-  console.log(parsed);
+      // cssjs Object mette a disposizione un metodo per parsare il CSS
+      var cssParsed = cssjsObj.parseCSS($scope.cssInput);
 
+      // Salvo il numero di selettori
+      $scope.totalSelector = selectorNumberCalc(cssParsed);
+    };
 
+    // Funzione che calcola il numero di selettori
+    function selectorNumberCalc (arr) {
+      var selectorArray = [];
 
-  for (var i=0; i< parsed.length; i++) {
-    selectorArray.push(parsed[i].selector);
+      // Per ogni indice di arr (per ogni dichiarazione presente nel foglio di stile) viene salvato il contenuto di "selector"
+      // che contiene un'unica stringa con tutti i selettori separati da virgola.
+      // Lo split(',') della stringa è necessario per evitare un conteggio errato nel caso avessimo selettori concatenati es: a,p{...}
+      for (var i = 0; i < arr.length; i++) {
+        // aggiorno l'array principale con tutti i selettori appartententi alle varie dichiarazioni
+        var selectors = arr[i].selector.split(',');
+        selectorArray = selectorArray.concat(selectors);
+      }
+      return selectorArray.length;
+    }
+
   }
-  var selectorArrayLength = selectorArray.length;
 
 
-  var string = selectorArray.join(',');
+}());
+
+
+
+/*
+(function (){
+  "use strict";
+
+
+
+ //var string = selectorArray.join(',');
+
 
 
 
 
   var specificity = SPECIFICITY.calculate(string);
-  //console.log(specificity)
-
   for (var i=0; i< specificity.length; i++) {
     specificityArray.push(specificity[i].specificity.replace(/\,/g,""));
   }
@@ -44,7 +74,6 @@
 
   //$('#myChart').attr('width',specificityArray.length*40);
   $('#selectors').text(specificityArray.length);
-  //console.log(specificityArray)
 
 
 
@@ -137,43 +166,11 @@ var myChartLight = new Chart(ctxLight,{
 
 
 
-// Line Chart
-/*
-  var salesData = {
-    labels: specificityArray,
-    datasets: [
 
-      {
-        label: "Middle",
-        fillColor: "rgba(255, 172, 100, 0.1)",
-        strokeColor: "rgba(255, 172, 100, 1)",
-        pointColor: "rgba(255, 172, 100, 1)",
-        pointStrokeColor: "#202b33",
-        pointHighlightStroke: "rgba(225,225,225,0.9)",
-        data: specificityArray
-      }
-    ]
-  };
-  var ctx = document.getElementById("myChartLight").getContext("2d");
-  window.myLineChart = new Chart(ctx).Line(salesData, {
-    pointDotRadius : 6,
-    pointDotStrokeWidth : 2,
-    datasetStrokeWidth : 3,
-    scaleShowVerticalLines: false,
-    scaleGridLineWidth : 2,
-    scaleShowGridLines : true,
-    scaleGridLineColor : "rgba(225, 255, 255, 0.02)",
-    scaleOverride: true,
-    scaleSteps: 25,
-    scaleStepWidth: 10,
-    scaleStartValue: 0,
-    responsive: false
-  });
-
-*/
 
 
 
 
 
 }());
+*/

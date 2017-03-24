@@ -136,3 +136,17 @@ textarea {
 .icon--book {
 
 }
+
+.btn {
+  background:    #fa2a02;
+  background:    -webkit-linear-gradient(#fa2a02, #b62205);
+  background:    linear-gradient(#fa2a02, #b62205);
+  border:        1px solid #781300;
+  border-radius: 2px;
+  color:         #fff;
+  display:       inline-block;
+  padding:       10px 24px;
+  font:          normal 400 21px/1 "Roboto", sans-serif;
+  text-align:    center;
+  text-shadow:   1px 1px 0 #781300;
+}
