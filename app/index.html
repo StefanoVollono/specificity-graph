@@ -54,28 +54,37 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-6 col-md-3">
       <div class="box box--spaced text-right fill--blu">
-        <h3 class="text--title">Selectors:</h3>
-        <p class="text--head">{{totalSelector}}</p>
+        <h3 class="text--title">Rules:</h3>
+        <p class="text--head">{{sgtConfig.rules.length}}</p>
         <div class="box__deco">
           <svg class="icon icon-sort-amount-desc"><use xlink:href="#icon-sort-amount-desc"></use></svg>
         </div>
       </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-6 col-md-3">
+      <div class="box box--spaced text-right fill--blu">
+        <h3 class="text--title">Selectors:</h3>
+        <p class="text--head">{{sgtConfig.selectors.length}}</p>
+        <div class="box__deco">
+          <svg class="icon icon-sort-amount-desc"><use xlink:href="#icon-sort-amount-desc"></use></svg>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
       <div class="box box--spaced text-right fill--green">
-        <h3 class="text--title">Directives:</h3>
-        <p class="text--head">0</p>
+        <h3 class="text--title">Properties:</h3>
+        <p class="text--head">{{sgtConfig.properties.length}}</p>
         <div class="box__deco">
           <svg class="icon icon--book"><use xlink:href="#icon-book"></use></svg>
         </div>
       </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-6 col-md-3">
       <div class="box box--spaced text-right fill-orange">
         <h3 class="text--title">!important:</h3>
-        <p class="text--head">0</p>
+        <p class="text--head">{{sgtConfig.important.length}}</p>
         <div class="box__deco">
           <svg class="icon icon-evil"><use xlink:href="#icon-evil"></use></svg>
         </div>

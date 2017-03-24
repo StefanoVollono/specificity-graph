@@ -12,10 +12,14 @@
   // Main dashboard controller function
   function MainDashboard ($scope) {
 
+
+
     // Declare some variables
-    var selectorArray = [];
-    var specificityArray = [];
-    $scope.totalSelector = 0;
+
+    //var specificityArray = [];
+    $scope.sgtConfig = {
+      selectors: []
+    };
 
     // Initialize parser object
     var cssjsObj = new cssjs();
@@ -26,12 +30,39 @@
       // cssjs Object mette a disposizione un metodo per parsare il CSS
       var cssParsed = cssjsObj.parseCSS($scope.cssInput);
 
-      // Salvo il numero di selettori
-      $scope.totalSelector = selectorNumberCalc(cssParsed);
+      // Salvo l'array di selettori
+      $scope.sgtConfig.selectors = getSelectors(cssParsed);
+
     };
 
-    // Funzione che calcola il numero di selettori
-    function selectorNumberCalc (arr) {
+    // Specificity Calculator is built for CSS Selectors Level 3.
+    // Specificity Calculator isn’t a CSS validator.
+    // If you enter invalid selectors it will return incorrect results.
+    /*var string = selectorArray.join(',');
+    var specificity = SPECIFICITY.calculate(string);
+    for (var i = 0; i < specificity.length; i++) {
+      specificityArray.push(specificity[i].specificity.replace(/\,/g,""));
+    }*/
+
+
+
+    // TODO :: IL CICLO LO DEVO FARE UNA VOLTA SOLA
+
+    // Funzione che ritorna le rules
+    function getRules (arr) {
+      var rulesArray = [];
+
+      // Per ogni indice di arr (per ogni rule presente nel foglio di stile).
+      for (var i = 0; i < arr.length; i++) {
+
+      }
+      return rulesArray;
+    }
+
+
+
+    // Funzione che ritorna i selettori
+    function getSelectors (arr) {
       var selectorArray = [];
 
       // Per ogni indice di arr (per ogni dichiarazione presente nel foglio di stile) viene salvato il contenuto di "selector"
@@ -42,7 +73,7 @@
         var selectors = arr[i].selector.split(',');
         selectorArray = selectorArray.concat(selectors);
       }
-      return selectorArray.length;
+      return selectorArray;
     }
 
   }
@@ -56,63 +87,45 @@
 (function (){
   "use strict";
 
-
-
- //var string = selectorArray.join(',');
-
-
-
-
-
-  var specificity = SPECIFICITY.calculate(string);
-  for (var i=0; i< specificity.length; i++) {
-    specificityArray.push(specificity[i].specificity.replace(/\,/g,""));
-  }
-
-
-
-
   //$('#myChart').attr('width',specificityArray.length*40);
-  $('#selectors').text(specificityArray.length);
+
+ // Chart.js
+  var ctx = document.getElementById("myChart").getContext("2d");
 
 
-
-var ctx = document.getElementById("myChart").getContext("2d");
-
-// Chart.js
-var myChart = new Chart(ctx,{
-  type: 'line',
-  data: {
-    labels: specificityArray,
-    datasets: [
-      {
-        label: "Specificity",
-        fill: true,
-        lineTension: 0.4,
-        backgroundColor: "rgba(255, 172, 100, 0.1)",
-        borderColor: "rgba(255, 172, 100, 1)",
-        borderCapStyle: 'butt',
-        borderDash: [],
-        borderDashOffset: 2,
-        borderJoinStyle: 'miter',
-        pointBorderColor: "#202b33",
-        pointBackgroundColor: "rgba(255, 172, 100, 1)",
-        pointBorderWidth: 2,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: "rgba(255, 172, 100, 1)",
-        pointHoverBorderColor: "#ffffff",
-        pointHoverBorderWidth: 3,
-        pointRadius: 6,
-        pointHitRadius: 10,
-        data: specificityArray,
-        spanGaps: false
-      }
-    ]
-  },
-  options: {
-    responsive: false,
-  }
-});
+  var myChart = new Chart(ctx,{
+    type: 'line',
+    data: {
+      labels: specificityArray,
+      datasets: [
+        {
+          label: "Specificity",
+          fill: true,
+          lineTension: 0.4,
+          backgroundColor: "rgba(255, 172, 100, 0.1)",
+          borderColor: "rgba(255, 172, 100, 1)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 2,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "#202b33",
+          pointBackgroundColor: "rgba(255, 172, 100, 1)",
+          pointBorderWidth: 2,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgba(255, 172, 100, 1)",
+          pointHoverBorderColor: "#ffffff",
+          pointHoverBorderWidth: 3,
+          pointRadius: 6,
+          pointHitRadius: 10,
+          data: specificityArray,
+          spanGaps: false
+        }
+      ]
+    },
+    options: {
+      responsive: false,
+    }
+  });
 
 
 
