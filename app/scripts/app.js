@@ -3,14 +3,19 @@
 
   // define angular app
   angular
-    .module('sgt',[])
+    .module('sgt',["chart.js"])
     .controller('MainDashboard', MainDashboard);
 
+
+
+
   // Safe minify
-  MainDashboard.$inject = ['$scope'];
+  MainDashboard.$inject = ['$scope', '$timeout'];
 
   // Main dashboard controller function
-  function MainDashboard ($scope) {
+  function MainDashboard ($scope, $timeout) {
+
+    $scope.entryPointClick = false;
 
     // Default Obj
     $scope.sgtConfig = {};
@@ -20,6 +25,9 @@
 
     // Entry Point scan Button
     $scope.parseCssInput = function () {
+
+      // Posso mostrare i grafici
+      $scope.entryPointClick = true;
 
       // cssjs Object mette a disposizione un metodo per parsare il CSS
       var cssParsed = cssjsObj.parseCSS($scope.cssInput);
@@ -34,15 +42,61 @@
       // Specificity Calculator is built for CSS Selectors Level 3.
       // Specificity Calculator isn’t a CSS validator.
       // If you enter invalid selectors it will return incorrect results.
-      console.log($scope.sgtConfig.selectors)
-      //var string = selectorArray.join(',');
-      //var specificity = SPECIFICITY.calculate(string);
-      //for (var i = 0; i < specificity.length; i++) {
-        //specificityArray.push(specificity[i].specificity.replace(/\,/g,""));
-      //}
+      $scope.sgtConfig.specificityArr = getSpecificity($scope.sgtConfig.selectors.selectorsArr);
 
+      //TODO CREARE UN ARRAY CON I SELETTORI E UN ALTRO CON LA SPECIFICITA COSI DA POTERLI AFFIANCARE
+
+      // TODO SPOSTARE
+      $scope.datasetOverride = [
+        {
+          borderDashOffset: 2,
+          pointBorderWidth: 2,
+          pointRadius: 6,
+          lineTension: 0.3,
+          pointHoverRadius: 5,
+          pointHoverBorderWidth: 3
+        }
+      ];
+
+      $scope.options = [
+        {responsive: false}
+      ];
+
+      $scope.colors = [
+        {
+          backgroundColor: "rgba(255, 172, 100, 0.1)",
+          pointBackgroundColor: "rgba(255, 172, 100, 1)",
+          pointHoverBackgroundColor: "rgba(255, 172, 100, 1)",
+          borderColor: "rgba(255, 172, 100, 1)",
+          pointBorderColor: '#202b33',
+          pointHoverBorderColor: "#ffffff"
+        }
+      ];
+      $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+      $scope.series = ['Specificity'];
+      $scope.data = [[99,98,88]];
 
     };
+
+
+
+
+    // Funzione per il calcolo della specificità
+    function getSpecificity (arr) {
+
+      // Converto l'array in una stringa
+      var selectorString = arr.join(',');
+
+      // Uso la libreria SPECIFICITY per calcolare la specificità dei singoli selettori
+      var spec = SPECIFICITY.calculate(selectorString);
+
+      //for (var i = 0; i < specificity.length; i++) {
+      //specificityArray.push(specificity[i].specificity.replace(/\,/g,""));
+      //}
+
+      return spec;
+
+    }
 
 
     // Funzione che ritorna i selettori
@@ -51,8 +105,6 @@
         selectorsArr: [],
         selectorsTot: 0
       };
-
-      //var selectorArray = [];
 
       // Per ogni indice di arr (per ogni dichiarazione presente nel foglio di stile) viene salvato il contenuto di "selector"
       // che contiene un'unica stringa con tutti i selettori separati da virgola.
@@ -95,6 +147,16 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
   }
 
 
@@ -103,53 +165,10 @@
 
 
 /*
-(function (){
-  "use strict";
+
+$('#myChart').attr('width',specificityArray.length*40);
 
 
-  //$('#myChart').attr('width',specificityArray.length*40);
-
- // Chart.js
-  var ctx = document.getElementById("myChart").getContext("2d");
-
-
-  var myChart = new Chart(ctx,{
-    type: 'line',
-    data: {
-      labels: specificityArray,
-      datasets: [
-        {
-          label: "Specificity",
-          fill: true,
-          lineTension: 0.4,
-          backgroundColor: "rgba(255, 172, 100, 0.1)",
-          borderColor: "rgba(255, 172, 100, 1)",
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 2,
-          borderJoinStyle: 'miter',
-          pointBorderColor: "#202b33",
-          pointBackgroundColor: "rgba(255, 172, 100, 1)",
-          pointBorderWidth: 2,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: "rgba(255, 172, 100, 1)",
-          pointHoverBorderColor: "#ffffff",
-          pointHoverBorderWidth: 3,
-          pointRadius: 6,
-          pointHitRadius: 10,
-          data: specificityArray,
-          spanGaps: false
-        }
-      ]
-    },
-    options: {
-      responsive: false,
-    }
-  });
-
-
-
-// Chart.js
 
 var ctxLight = document.getElementById("myChartLight").getContext("2d");
 var myChartLight = new Chart(ctxLight,{

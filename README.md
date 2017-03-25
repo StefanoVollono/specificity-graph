@@ -12,5 +12,9 @@ A JavaScript module for calculating and comparing the specificity of CSS selecto
 Simple HTML5 Charts using the <canvas>
 [https://github.com/chartjs/Chart.js](https://github.com/chartjs/Chart.js)
 
+### Angular Chart
+Reactive, responsive, beautiful charts for AngularJS using Chart.js
+[https://github.com/jtblin/angular-chart.js](https://github.com/jtblin/angular-chart.js)
+
 ### Other libs
 Angular, jQuery, Bootstrap Grid
