@@ -12,14 +12,8 @@
   // Main dashboard controller function
   function MainDashboard ($scope) {
 
-
-
-    // Declare some variables
-
-    //var specificityArray = [];
-    $scope.sgtConfig = {
-      selectors: 0
-    };
+    // Default Obj
+    $scope.sgtConfig = {};
 
     // Initialize parser object
     var cssjsObj = new cssjs();
@@ -30,40 +24,35 @@
       // cssjs Object mette a disposizione un metodo per parsare il CSS
       var cssParsed = cssjsObj.parseCSS($scope.cssInput);
 
-      // Salvo l'array di selettori
+      // Ritorno le rules [contiene sia le direttive che gli important]
+      $scope.sgtConfig.rules = getRules(cssParsed); // object
+
+      // Ritorno i selettori
       $scope.sgtConfig.selectors = getSelectors(cssParsed);
 
+
+      // Specificity Calculator is built for CSS Selectors Level 3.
+      // Specificity Calculator isn’t a CSS validator.
+      // If you enter invalid selectors it will return incorrect results.
+      console.log($scope.sgtConfig.selectors)
+      //var string = selectorArray.join(',');
+      //var specificity = SPECIFICITY.calculate(string);
+      //for (var i = 0; i < specificity.length; i++) {
+        //specificityArray.push(specificity[i].specificity.replace(/\,/g,""));
+      //}
+
+
     };
-
-    // Specificity Calculator is built for CSS Selectors Level 3.
-    // Specificity Calculator isn’t a CSS validator.
-    // If you enter invalid selectors it will return incorrect results.
-    /*var string = selectorArray.join(',');
-    var specificity = SPECIFICITY.calculate(string);
-    for (var i = 0; i < specificity.length; i++) {
-      specificityArray.push(specificity[i].specificity.replace(/\,/g,""));
-    }*/
-
-
-
-    // TODO :: IL CICLO LO DEVO FARE UNA VOLTA SOLA
-
-    // Funzione che ritorna le rules
-    function getRules (arr) {
-      var rulesArray = [];
-
-      // Per ogni indice di arr (per ogni rule presente nel foglio di stile).
-      for (var i = 0; i < arr.length; i++) {
-
-      }
-      return rulesArray;
-    }
-
 
 
     // Funzione che ritorna i selettori
     function getSelectors (arr) {
-      var selectorArray = [];
+      var rulesObj = {
+        selectorsArr: [],
+        selectorsTot: 0
+      };
+
+      //var selectorArray = [];
 
       // Per ogni indice di arr (per ogni dichiarazione presente nel foglio di stile) viene salvato il contenuto di "selector"
       // che contiene un'unica stringa con tutti i selettori separati da virgola.
@@ -71,10 +60,40 @@
       for (var i = 0; i < arr.length; i++) {
         // aggiorno l'array principale con tutti i selettori appartententi alle varie dichiarazioni
         var selectors = arr[i].selector.split(',');
-        selectorArray = selectorArray.concat(selectors);
+        rulesObj.selectorsArr = rulesObj.selectorsArr.concat(selectors);
+        rulesObj.selectorsTot = rulesObj.selectorsArr.length;
       }
-      return selectorArray;
+      return rulesObj;
     }
+
+    // Funzione che ritorna le proprietà
+    function getRules (arr) {
+      var rulesObj = {
+        rulesTot: arr.length,
+        directives: [],
+        directivesTot: 0,
+        importantTot: 0
+      };
+
+      for (var i = 0; i < arr.length; i++) {
+        var properties = arr[i].rules;
+        properties.forEach(function(item) {
+          var dir = item.directive; // salvo in dir il valore corrente della proprietà "directive"
+          var val = item.value; // salvo in val il valore corrente della proprietà "value" (che potrebbe contenere !important)
+
+          rulesObj.directives.push(dir); // pusho il risultato nell'array
+          rulesObj.directivesTot = rulesObj.directives.length;
+
+          if (val.indexOf('!important') > 0) {
+            rulesObj.importantTot ++; // incremento il valore di rulesObj.important solo se la chiave !important viene trovata
+          }
+
+        });
+      }
+      return rulesObj;
+    }
+
+
 
   }
 
@@ -86,6 +105,7 @@
 /*
 (function (){
   "use strict";
+
 
   //$('#myChart').attr('width',specificityArray.length*40);
 
