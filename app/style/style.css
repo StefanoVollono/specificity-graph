@@ -110,6 +110,7 @@ textarea {
     overflow-x: auto;
     overflow-y: hidden;
     padding: 15px;
+    -webkit-overflow-scrolling: touch;
 }
 .graph--small {
     height: auto;

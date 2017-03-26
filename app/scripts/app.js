@@ -25,8 +25,17 @@
 
     $scope.entryPointClick = false;
 
-    // Default Obj
-    $scope.sgtConfig = {};
+    // Default Obj & setting to 0 all values
+    $scope.sgtConfig = {
+      rules: {
+        rulesTot: 0,
+        directivesTot: 0,
+        importantTot: 0
+      },
+      selectors: {
+        selectorsTot: 0
+      }
+    };
 
     // Initialize parser object
     var cssjsObj = new cssjs();
@@ -53,7 +62,7 @@
       $scope.sgtConfig.specificityArr = getSpecificity($scope.sgtConfig.selectors.selectorsArr);
 
 
-      // TODO SPOSTARE
+      // Graph configuration
       $scope.sgtConfig.chart = {
         height: 585,
         width: $scope.sgtConfig.selectors.selectorsTot * 40 // tra ogni punto ci sono 40px
