@@ -55,11 +55,14 @@
           <div class="graph__inner">
             <svg ng-show="!entryPointClick" class="icon icon-graph"><use xlink:href="#graph"></use></svg>
             <canvas
+              height="{{sgtConfig.chart.height}}"
+              width="{{sgtConfig.chart.width}}"
               class="chart chart-line"
               chart-data="data"
               chart-colors="colors"
               chart-labels="labels"
               chart-dataset-override="datasetOverride"
+              chart-options="options"
               chart-series="series"></canvas>
             <!--
             <canvas ng-show="entryPointClick" class="graph__elem" id="myChart" width="8000" height="600"></canvas>

@@ -1,12 +1,20 @@
 (function (){
-  "use strict";
+  //"use strict";
 
   // define angular app
   angular
     .module('sgt',["chart.js"])
+    .config(['ChartJsProvider', function (ChartJsProvider) {
+      // Configure all charts
+      ChartJsProvider.setOptions({
+        responsive: false,
+        maintainAspectRatio: false,
+        scales: {
+          xAxes: [{display: false}]
+        }
+      });
+    }])
     .controller('MainDashboard', MainDashboard);
-
-
 
 
   // Safe minify
@@ -44,9 +52,13 @@
       // If you enter invalid selectors it will return incorrect results.
       $scope.sgtConfig.specificityArr = getSpecificity($scope.sgtConfig.selectors.selectorsArr);
 
-      //TODO CREARE UN ARRAY CON I SELETTORI E UN ALTRO CON LA SPECIFICITA COSI DA POTERLI AFFIANCARE
 
       // TODO SPOSTARE
+      $scope.sgtConfig.chart = {
+        height: 585,
+        width: $scope.sgtConfig.selectors.selectorsTot * 40 // tra ogni punto ci sono 40px
+      };
+
       $scope.datasetOverride = [
         {
           borderDashOffset: 2,
@@ -56,10 +68,6 @@
           pointHoverRadius: 5,
           pointHoverBorderWidth: 3
         }
-      ];
-
-      $scope.options = [
-        {responsive: false}
       ];
 
       $scope.colors = [
@@ -72,9 +80,9 @@
           pointHoverBorderColor: "#ffffff"
         }
       ];
-      $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+      $scope.labels = $scope.sgtConfig.selectors.selectorsArr;
       $scope.series = ['Specificity'];
-      $scope.data = [[99,98,88]];
+      $scope.data = [$scope.sgtConfig.specificityArr];
 
     };
 
@@ -89,12 +97,12 @@
 
       // Uso la libreria SPECIFICITY per calcolare la specificità dei singoli selettori
       var spec = SPECIFICITY.calculate(selectorString);
+      var specValues = [];
+      for (var i = 0; i < spec.length; i++) {
+        specValues.push(spec[i].specificity.replace(/\,/g,""));
+      }
 
-      //for (var i = 0; i < specificity.length; i++) {
-      //specificityArray.push(specificity[i].specificity.replace(/\,/g,""));
-      //}
-
-      return spec;
+      return specValues;
 
     }
 
@@ -148,19 +156,25 @@
 
 
 
-
-
-
-
-
-
-
-
-
   }
 
 
 }());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -214,15 +228,4 @@ var myChartLight = new Chart(ctxLight,{
   }
 });
 
-
-
-
-
-
-
-
-
-
-
-}());
 */
