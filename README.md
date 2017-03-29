@@ -1,7 +1,7 @@
 ## Il progetto
 Questo è un tool molto semplice che consente di copiare e incollare il proprio CSS e analizzare l'andamento di specificità del foglio di stile. Eventuali picchi di specificità potranno essere analizzati andando direttamente con il cursore in corrispondenza del nodo incriminato. 
 
-![spec 1](http://res.cloudinary.com/ddbdqb6js/image/upload/v1490724560/spec_1_cip6mk.png)
+![spec 1](http://res.cloudinary.com/ddbdqb6js/image/upload/v1490768227/spec_1_ruwaoy.png)
 
 ## La specificità
 Calcolarla è facile, essa è composta idealmente da 4 valori separati da virgola (0,0,0,0) e ogni tipologia di selettore (ID, classe, …) attribuisce un unità al canale di riferimento. Dal punto di vista puramente teorico avremo che:
@@ -13,12 +13,12 @@ Calcolarla è facile, essa è composta idealmente da 4 valori separati da virgol
 5. La specificità del selettore in linea è pari a 1,0,0,0 (il massimo).
 6. Le dichiarazioni a cui è stato abbinato !important prevaranno a prescindere su tutte le restanti dichiarazioni che non posseggono questo attributo.
 
-![spec 2](http://res.cloudinary.com/ddbdqb6js/image/upload/v1490724560/spec_2_i5c1nh.png)
+![spec 2](http://res.cloudinary.com/ddbdqb6js/image/upload/v1490768227/spec_2_a8uon2.png)
 
 ## Evita i picchi
 L'idea che sta alla base di questo progetto nasce dall'esigenza di tenere sotto controllo il livello di specificità dei nostri progetti. Un livello basso o meglio, un livello costante e lineare del grafico, equivale ad avere in linea di massima progetti manutenibili e scalabili nel tempo. 
 
-![spec 3](http://res.cloudinary.com/ddbdqb6js/image/upload/v1490724787/spec_3_zitb5o.png)
+![spec 3](http://res.cloudinary.com/ddbdqb6js/image/upload/v1490768229/spec_3_q4tbwy.png)
 
 ## The Specificity Graph Tool is fully based on open source projects:
 
