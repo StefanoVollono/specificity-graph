@@ -127,38 +127,52 @@
       // che contiene un'unica stringa con tutti i selettori separati da virgola.
       // Lo split(',') della stringa è necessario per evitare un conteggio errato nel caso avessimo selettori concatenati es: a,p{...}
       for (var i = 0; i < arr.length; i++) {
-        // aggiorno l'array principale con tutti i selettori appartententi alle varie dichiarazioni
-        var selectors = arr[i].selector.split(',');
-        rulesObj.selectorsArr = rulesObj.selectorsArr.concat(selectors);
-        rulesObj.selectorsTot = rulesObj.selectorsArr.length;
+        // aggiorno l'array principale con tutti i selettori appartententi alle varie dichiarazioni if rules è presente
+        if (arr[i].hasOwnProperty('rules')) {
+          var selectors = arr[i].selector.split(',');
+          rulesObj.selectorsArr = rulesObj.selectorsArr.concat(selectors);
+          rulesObj.selectorsTot = rulesObj.selectorsArr.length;
+        }
       }
       return rulesObj;
     }
 
     // Funzione che ritorna le proprietà
     function getRules (arr) {
+      var properties = [];
       var rulesObj = {
-        rulesTot: arr.length,
+        rulesTot: 0,
         directives: [],
         directivesTot: 0,
         importantTot: 0
       };
 
       for (var i = 0; i < arr.length; i++) {
-        var properties = arr[i].rules;
-        properties.forEach(function(item) {
-          var dir = item.directive; // salvo in dir il valore corrente della proprietà "directive"
-          var val = item.value; // salvo in val il valore corrente della proprietà "value" (che potrebbe contenere !important)
+      
+        // Filtro l'array che non hanno "rules"
+        if (arr[i].hasOwnProperty('rules')) {
+          
+          // incremento il valore di rulesObj.v solo se la proprietà "rules" viene trovata
+          rulesObj.rulesTot ++; 
 
-          rulesObj.directives.push(dir); // pusho il risultato nell'array
-          rulesObj.directivesTot = rulesObj.directives.length;
+          // Salvo l'array con tutte le properties/values
+          properties = arr[i].rules;
 
-          if (val.indexOf('!important') > 0) {
-            rulesObj.importantTot ++; // incremento il valore di rulesObj.important solo se la chiave !important viene trovata
-          }
+          properties.forEach(function(item) {
+            var dir = item.directive; // salvo in dir il valore corrente della proprietà "directive"
+            var val = item.value; // salvo in val il valore corrente della proprietà "value" (che potrebbe contenere !important)
 
-        });
+            rulesObj.directives.push(dir); // pusho il risultato nell'array
+            
+
+            if (val.indexOf('!important') > 0) {
+              rulesObj.importantTot ++; // incremento il valore di rulesObj.important solo se la chiave !important viene trovata
+            }
+            
+          });
+        }
       }
+      rulesObj.directivesTot = rulesObj.directives.length;
       return rulesObj;
     }
 
