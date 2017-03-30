@@ -33,7 +33,12 @@
         importantTot: 0
       },
       selectors: {
+        selectorsArr: [],
         selectorsTot: 0
+      },
+      chart: {
+        height: 0,
+        width: 0
       }
     };
 
@@ -55,18 +60,24 @@
       // Ritorno i selettori
       $scope.sgtConfig.selectors = getSelectors(cssParsed);
 
-
       // Specificity Calculator is built for CSS Selectors Level 3.
       // Specificity Calculator isn’t a CSS validator.
       // If you enter invalid selectors it will return incorrect results.
       $scope.sgtConfig.specificityArr = getSpecificity($scope.sgtConfig.selectors.selectorsArr);
 
+      // Ritorno i selettori
+      $scope.sgtConfig.selectors = getSelectors(cssParsed);
 
       // Graph configuration
+      $scope.sgtConfig.chart = graphConfig($scope.sgtConfig.selectors.selectorsTot);
+
+
+      /* Graph configuration
       $scope.sgtConfig.chart = {
         height: 585,
         width: $scope.sgtConfig.selectors.selectorsTot * 40 // tra ogni punto ci sono 40px
       };
+      */
 
       $scope.datasetOverride = [
         {
@@ -114,7 +125,6 @@
       return specValues;
 
     }
-
 
     // Funzione che ritorna i selettori
     function getSelectors (arr) {
@@ -176,7 +186,29 @@
       return rulesObj;
     }
 
+    // Funzione per la gestione della larghezza del grafico
+    function graphConfig(items) {
+      var maxWidth = 8000; // todo controllare max width raggiungibile
+      var itemsLength = items; // numero di selettori
+      var step = 40; // spazio tra un puntino e un altro
+      var fakeWidth = itemsLength * step; // la larghezza che il grafico avrebbe senza ulteriori controlli
+      var parentWidth = $('.graph--big').width();
 
+      var chart = {}; // Object chart configuration
+      chart.height = 585; // todo renderlo dinamico (div padre)
+      
+      if(fakeWidth < parentWidth) {
+        // Se la larghezza del grafico è minore della largezza del div che lo contiene -> renderlo largo quanto il div. 
+        chart.width = parentWidth; 
+      } else if (fakeWidth > maxWidth) {
+        // Se la larghezza è maggiore di 8000 (controllare) -> renderlo = 8000.
+        chart.width = maxWidth; 
+      } else {
+        chart.width = fakeWidth; 
+      }
+    
+      return chart;
+    }
 
 
   }
