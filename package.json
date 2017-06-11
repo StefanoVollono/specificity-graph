@@ -11,5 +11,11 @@
     "front-css-js": "^1.0.0-1",
     "jquery": "^3.2.1",
     "specificity": "^0.3.0"
+  },
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-useref": "^3.1.2",
+    "run-sequence": "^1.2.2"
   }
 }
