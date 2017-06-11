@@ -1,0 +1,15 @@
+{
+  "name": "specificity-graph",
+  "version": "0.1.3",
+  "main": "app.js",
+  "repository": "https://stefanovollono@github.com/StefanoVollono/specificity-graph.git",
+  "author": "stefano vollono <info@laboratoriocss.it>",
+  "license": "MIT",
+  "dependencies": {
+    "angular-chart.js": "^1.1.1",
+    "bootstrap-3-grid": "^0.0.1",
+    "front-css-js": "^1.0.0-1",
+    "jquery": "^3.2.1",
+    "specificity": "^0.3.0"
+  }
+}
