@@ -7,9 +7,9 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600i" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" />
 
   <!-- build:css main.min.css -->
+  <link rel="stylesheet" type="text/css" href="../node_modules/reset.css/reset.css" />
   <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap-3-grid/bootstrap-3-grid.css">
   <link rel="stylesheet" type="text/css" href="style.css">
   <!-- endbuild -->
@@ -37,9 +37,7 @@
           </div>
           <textarea
             ng-model="cssInput"
-            placeholder=".selector {
-    property: value
-}"
+            placeholder=".selector { property: value }"
             required></textarea>
           <button type="button" class="btn fill-red" ng-disabled="cssFormArea.$invalid" ng-click="parseCssInput()">Scan it</button>
         </form>
