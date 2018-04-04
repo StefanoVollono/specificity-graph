@@ -10,6 +10,7 @@ html {
 
 body {
     min-height: 100vh;
+    padding: 20px;
     background-color: #e7edee;
     overflow-x: hidden;
     font-family: 'Open Sans', sans-serif;
@@ -17,15 +18,46 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row{display: flex}
+.row--spec {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.row--main .box:nth-child(1){
+  flex: 0 0 250px;
+  margin-right: 20px;
+}
+.row--main .box:nth-child(2){
+  flex: 1;
+}
+.row--spec > .box{
+  flex: 0 0 calc(25% - 20px);
+}
+@media only screen and (max-width:900px) { 
+  .row--main {flex-direction: column}
+  .row--main .box:nth-child(1){margin-right: 0}
+  .row--spec > .box{flex: 0 0 calc(50% - 10px)}
+}
+@media only screen and (max-width:580px) { 
+  .row--spec > .box{flex: 1 0 100%;}
+}
+
 /* component box */
 .box {
     background-color: #FFF;
     border-radius: 3px;
     box-shadow: 0 1px 2px #c8d1d3;
-    margin: 15px 0;
     overflow: hidden;
     position: relative;
+    margin: 20px 0 0;
 }
+header.box {margin: 0}
 .box--spaced {padding: 20px;}
 .box__head {padding: 20px 10px;}
 .box__deco {
@@ -49,12 +81,12 @@ body {
 
 
 .avatar {
-    border-radius: 100%;
-    height: 60px;
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    margin-top: -30px;
+  display: block;
+}
+.avatar__image {
+  border-radius: 100%;
+  height: 60px;
+  width: 60px;
 }
 
 

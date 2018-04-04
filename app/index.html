@@ -10,26 +10,23 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" />
 
   <!-- build:css main.min.css -->
-  <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap-3-grid/bootstrap-3-grid.css">
   <link rel="stylesheet" type="text/css" href="style.css">
   <!-- endbuild -->
 
 </head>
 <body>
 
-<div class="container-fluid" ng-controller="MainDashboard">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="box box--spaced">
-        <h1 class="text text--head">Instant <span class="text--evidence">Specificity</span> Graph <span style="font-size: 50%">(ßeta)</span></h1>
-        <a href="http://www.laboratoriocss.it" target="_blank">
-          <img class="avatar" src="https://it.gravatar.com/userimage/23846567/f4162ae749d49bcc9620a2e0dd29b353.jpg?size=200" />
-        </a>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
+<div class="container" ng-controller="MainDashboard">
+  
+  <header class="box box--spaced">
+    <h1 class="text text--head">Instant <span class="text--evidence">Specificity</span> Graph <span style="font-size: 50%">(ßeta)</span></h1>
+    <a href="http://www.laboratoriocss.it" target="_blank" class="avatar">
+      <img class="avatar__image" src="https://it.gravatar.com/userimage/23846567/f4162ae749d49bcc9620a2e0dd29b353.jpg?size=200" />
+    </a>
+  </header>
+  
+  <main>
+    <div class="row row--main">
       <div class="box">
         <form name="cssFormArea" novalidate>
           <div class="box__head fill-red">
@@ -37,9 +34,7 @@
           </div>
           <textarea
             ng-model="cssInput"
-            placeholder=".selector {
-    property: value
-}"
+            placeholder=".selector {property: value}"
             required></textarea>
           <button type="button" class="btn fill-red" ng-disabled="cssFormArea.$invalid" ng-click="parseCssInput()">Scan it</button>
         </form>
@@ -54,8 +49,6 @@
         </div>
       </div>
       -->
-    </div>
-    <div class="col-sm-9">
       <div class="box fill-dark">
         <div class="graph graph--big">
           <div class="graph__inner">
@@ -77,45 +70,46 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6 col-md-3">
-      <div class="box box--spaced text-right fill-orange">
-        <h3 class="text--title">Rules:</h3>
-        <p class="text--head">{{sgtConfig.rules.rulesTot}}</p>
-        <div class="box__deco">
-          <svg class="icon icon-evil"><use xlink:href="#braces"></use></svg>
+    <div class="row row--spec">
+      
+        <div class="box box--spaced text-right fill-orange">
+          <h3 class="text--title">Rules:</h3>
+          <p class="text--head">{{sgtConfig.rules.rulesTot}}</p>
+          <div class="box__deco">
+            <svg class="icon icon-evil"><use xlink:href="#braces"></use></svg>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="box box--spaced text-right fill--blu">
-        <h3 class="text--title">Selectors:</h3>
-        <p class="text--head">{{sgtConfig.selectors.selectorsTot}}</p>
-        <div class="box__deco">
-          <svg class="icon icon-sort-amount-desc"><use xlink:href="#icon-sort-amount-desc"></use></svg>
+      
+        <div class="box box--spaced text-right fill--blu">
+          <h3 class="text--title">Selectors:</h3>
+          <p class="text--head">{{sgtConfig.selectors.selectorsTot}}</p>
+          <div class="box__deco">
+            <svg class="icon icon-sort-amount-desc"><use xlink:href="#icon-sort-amount-desc"></use></svg>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="box box--spaced text-right fill--green">
-        <h3 class="text--title">Properties:</h3>
-        <p class="text--head">{{sgtConfig.rules.directivesTot}}</p>
-        <div class="box__deco">
-          <svg class="icon icon--book"><use xlink:href="#icon-book"></use></svg>
+      
+      
+        <div class="box box--spaced text-right fill--green">
+          <h3 class="text--title">Properties:</h3>
+          <p class="text--head">{{sgtConfig.rules.directivesTot}}</p>
+          <div class="box__deco">
+            <svg class="icon icon--book"><use xlink:href="#icon-book"></use></svg>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="box box--spaced text-right fill-yellow">
-        <h3 class="text--title">!important:</h3>
-        <p class="text--head">{{sgtConfig.rules.importantTot}}</p>
-        <div class="box__deco">
-          <svg class="icon icon-evil"><use xlink:href="#icon-evil"></use></svg>
+      
+      
+        <div class="box box--spaced text-right fill-yellow">
+          <h3 class="text--title">!important:</h3>
+          <p class="text--head">{{sgtConfig.rules.importantTot}}</p>
+          <div class="box__deco">
+            <svg class="icon icon-evil"><use xlink:href="#icon-evil"></use></svg>
+          </div>
         </div>
-      </div>
+      
     </div>
-  </div>
+
+  </main>
+
 </div>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
