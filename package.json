@@ -8,17 +8,16 @@
   "dependencies": {
     "angular-chart.js": "^1.1.1",
     "front-css-js": "^1.0.0-1",
-    "jquery": "^3.2.1",
+    "jquery": "^3.4.1",
     "reset.css": "^2.0.2",
     "specificity": "^0.3.0"
   },
   "devDependencies": {
-    "del": "^3.0.0",
-    "gulp": "^3.9.1",
-    "gulp-clean-css": "^3.4.1",
-    "gulp-htmlmin": "^3.0.0",
-    "gulp-uglify": "^3.0.0",
-    "gulp-useref": "^3.1.2",
-    "run-sequence": "^1.2.2"
+    "del": "^4.0.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-uglify": "^3.0.2",
+    "gulp-useref": "^3.1.6"
   }
 }
