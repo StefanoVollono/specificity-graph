@@ -1,0 +1,99 @@
+// GENERAL
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  min-height: 100vh;
+  padding: 20px;
+  background-color: $lightest;
+  overflow-x: hidden;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// TYPING
+.text {
+  font-size: 15px;
+  color: $light;
+  font-weight: 400;
+
+  &--head {
+    font-weight: 100;
+    font-size: 25px;
+
+    @media only screen and (min-width: 580px) {
+      font-size: 40px;
+    }
+  }
+
+  &--evidence {
+    font-weight: 400;
+  }
+
+  &--title{
+    text-transform: uppercase;
+    font-weight: 500;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  &--right {
+    text-align: right;
+  }
+}
+
+// ICONS
+.icon {
+  display: inline-block;
+  width: 70px;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: white;
+  height: inherit;
+
+  &-graph {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    left: 50%;
+  }
+}
+
+// BUTTONS
+.btn {
+  display: block;
+  border: 0;
+  width: 100%;
+  padding: 10px 0;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 400;
+  border-top: 1px solid $light;
+  color: white;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: .5;
+  }
+}
+
+// UTILITY CLASSES
+.fill-red     {background: $red!important;}
+.fill-green   {background: $green!important;}
+.fill-blu     {background: $blu!important;}
+.fill-yellow  {background: $yellow!important;}
+.fill-dark    {background: $dark!important;}
+.fill-light   {background: $light!important;}
+.fill-orange  {background: $orange!important;}

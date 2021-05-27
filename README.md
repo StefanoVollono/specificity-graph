@@ -40,6 +40,3 @@ Simple HTML5 Charts using the <canvas>
 ### Angular Chart
 Reactive, responsive, beautiful charts for AngularJS using Chart.js
 [https://github.com/jtblin/angular-chart.js](https://github.com/jtblin/angular-chart.js)
-
-### Other libs
-Angular, jQuery, Bootstrap Grid

@@ -1,23 +1,33 @@
 {
   "name": "specificity-graph",
-  "version": "0.1.4",
-  "main": "app.js",
-  "repository": "https://stefanovollono@github.com/StefanoVollono/specificity-graph.git",
-  "author": "stefano vollono <info@laboratoriocss.it>",
-  "license": "MIT",
+  "version": "0.1.0",
+  "private": true,
+  "author": "stefano vollono",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
   "dependencies": {
-    "angular-chart.js": "^1.1.1",
-    "front-css-js": "^1.0.0-1",
-    "jquery": "^3.4.1",
+    "chart.js": "^2.9.4",
+    "jotform-css.js": "^1.0.1",
+    "lodash": "^4.17.21",
     "reset.css": "^2.0.2",
-    "specificity": "^0.3.0"
+    "specificity": "^0.4.1",
+    "vue": "^2.6.11",
+    "vue-chartjs": "^3.5.1",
+    "vue-class-component": "^7.2.3",
+    "vue-property-decorator": "^9.1.2"
   },
   "devDependencies": {
-    "del": "^4.0.0",
-    "gulp": "^4.0.2",
-    "gulp-clean-css": "^4.2.0",
-    "gulp-htmlmin": "^5.0.1",
-    "gulp-uglify": "^3.0.2",
-    "gulp-useref": "^3.1.6"
-  }
+    "@types/vue-chartkick": "^0.5.1",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.2",
+    "typescript": "~4.1.5",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "license": "MIT",
+  "repository": "https://stefanovollono@github.com/StefanoVollono/specificity-graph.git"
 }

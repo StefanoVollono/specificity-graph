@@ -1,0 +1,19 @@
+// variables
+$red: #fa2a02;
+$green: #29c75f;
+$blu: #39c3da;
+$yellow: #FFBC11;
+$dark: #202b33;
+$light: #efefef;
+$orange: #FF690D;
+$gray: #c8d1d3;
+$lightest: #e7edee;
+
+// GENERIC BOX
+%box {
+  background-color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px $gray;
+  overflow: hidden;
+  position: relative;
+}
