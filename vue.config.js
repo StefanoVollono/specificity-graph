@@ -5,6 +5,7 @@
 // If you do, every time you use a scoped style in a component, a copy of the whole framework will be appended to the output.
 
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production' ? '/specificity-graph/': '/',
   css: {
     loaderOptions: {
       scss: {
