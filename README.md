@@ -1,4 +1,6 @@
-## The project
+## The project 
+![travis-ci](https://www.travis-ci.com/StefanoVollono/specificity-graph.svg?branch=master)
+
 Is a really simple tool which allows to copy and paste your CSS and analyse the stylesheet specificity state. Any peaks of specificity can be analysed by hovering the node itself.
 
 ![spec 1](http://res.cloudinary.com/ddbdqb6js/image/upload/v1490768227/spec_1_ruwaoy.png)
