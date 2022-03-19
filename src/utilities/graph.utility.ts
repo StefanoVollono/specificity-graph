@@ -32,6 +32,8 @@ export function graphConfig(sgtConfig: Specificity): Chart {
     labels: sgtConfig.selectors.selectorsArr,
     datasets: [{
       label: 'Specificity',
+      barThickness: 10,
+      maxBarThickness: 10,
       data: sgtConfig.specificityArr,
       backgroundColor: CHART_COLORS[_.random(CHART_COLORS.length-1)],
     }]

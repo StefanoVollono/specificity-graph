@@ -11,15 +11,13 @@
       yAxes:[
         {
           ticks: {
-              beginAtZero: true
+            crossAlign: "far",
+            beginAtZero: true
           },
-          maxBarThickness: 10,
-          barThickness: 10
         }
       ],
       xAxes: [
         {
-          maxBarThickness: 100,
           display: false
         }
       ]
