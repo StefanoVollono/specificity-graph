@@ -1,6 +1,6 @@
-import { CssjsParse, CssjsParseSubStyles } from '@/interfaces/cssjs.interface';
-import { Rules } from '@/interfaces/specificity.interface';
-import { RulesModel } from '@/models/specificity.model';
+import { CssjsParse, CssjsParseSubStyles } from '../interfaces/cssjs.interface';
+import { Rules } from '../interfaces/specificity.interface';
+import { RulesModel } from '../models/specificity.model';
 
 export function getRules (arr: CssjsParse[]): Rules {
   let rulesObj = new RulesModel();

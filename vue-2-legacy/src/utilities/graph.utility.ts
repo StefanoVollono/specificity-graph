@@ -1,6 +1,6 @@
-import { Chart } from "@/interfaces/specificity.interface";
-import { ChartModel } from "@/models/specificity.model";
-import { Specificity } from '@/interfaces/specificity.interface';
+import { Chart } from "../interfaces/specificity.interface";
+import { ChartModel } from "../models/specificity.model";
+import { Specificity } from '../interfaces/specificity.interface';
 import * as _ from 'lodash';
 
 export const CHART_COLORS = [

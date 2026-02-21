@@ -54,17 +54,17 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import DashboardHeader from '@/components/dashboard/DashboardHeader.vue';
-import DashboardForm from '@/components/dashboard/DashboardForm.vue';
-import DashboardGraph from '@/components/dashboard/DashboardGraph.vue';
-import DashboardSpecBox from '@/components/dashboard/DashboardSpecBox.vue';
-import { Specificity } from '@/interfaces/specificity.interface';
-import { specificityModelFactory } from '@/models/specificity.model';
-import { getRules } from '@/utilities/getRules.utility';
-import { getSelectors } from '@/utilities/getSelectors.utility';
-import { getSpecificity } from '@/utilities/getSpecificity.utility';
-import { graphConfig } from '@/utilities/graph.utility';
-import LineChart from '@/components/LineChart.vue';
+import DashboardHeader from './DashboardHeader.vue';
+import DashboardForm from './DashboardForm.vue';
+import DashboardGraph from './DashboardGraph.vue';
+import DashboardSpecBox from './DashboardSpecBox.vue';
+import { Specificity } from '../../interfaces/specificity.interface';
+import { specificityModelFactory } from '../../models/specificity.model';
+import { getRules } from '../../utilities/getRules.utility';
+import { getSelectors } from '../../utilities/getSelectors.utility';
+import { getSpecificity } from '../../utilities/getSpecificity.utility';
+import { graphConfig } from '../../utilities/graph.utility';
+import LineChart from '../LineChart.vue';
 import * as _ from 'lodash';
 
 @Component({

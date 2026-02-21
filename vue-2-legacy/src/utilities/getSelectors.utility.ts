@@ -1,6 +1,6 @@
-import { CssjsParse, CssjsParseRule, CssjsParseSubStyles } from "@/interfaces/cssjs.interface";
-import { Selectors } from "@/interfaces/specificity.interface";
-import { SelectorsModel } from "@/models/specificity.model";
+import { CssjsParse, CssjsParseRule, CssjsParseSubStyles } from "../interfaces/cssjs.interface";
+import { Selectors } from "../interfaces/specificity.interface";
+import { SelectorsModel } from "../models/specificity.model";
 
 // Funzione che ritorna i selettori
 export function getSelectors (arr: CssjsParse[]): Selectors {

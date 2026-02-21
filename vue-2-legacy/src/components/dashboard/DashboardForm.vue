@@ -22,8 +22,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { CssjsParse } from '@/interfaces/cssjs.interface'
-import { Cssjs } from '@/utilities/cssjs.utility.js'
+import { CssjsParse } from '../../interfaces/cssjs.interface'
+import { Cssjs } from '../../utilities/cssjs.utility.js'
 
 // Initialize parser object
 const cssjsInstance = new Cssjs();

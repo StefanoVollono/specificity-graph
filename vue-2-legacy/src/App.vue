@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import Dashboard from '@/components/dashboard/Dashboard.vue';
+import Dashboard from './components/dashboard/Dashboard.vue';
 
 
 @Component({
@@ -19,7 +19,7 @@ export default class App extends Vue {}
 
 <style lang="scss">
 @import "~reset.css/reset.css";
-@import "@/style/main";
+@import "style/main";
 
 * {
   box-sizing: border-box;

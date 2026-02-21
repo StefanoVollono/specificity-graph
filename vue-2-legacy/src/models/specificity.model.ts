@@ -1,4 +1,4 @@
-import { Chart, Rules, Selectors, Specificity } from "@/interfaces/specificity.interface";
+import { Chart, Rules, Selectors, Specificity } from "../interfaces/specificity.interface";
 
 class specificityModel implements Specificity {
   rules: Rules;
